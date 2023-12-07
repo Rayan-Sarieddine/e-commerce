@@ -2,6 +2,11 @@
 header("Access-Control-Allow-origin:*");
 include ("connection.php");
 
+
+
+
+
+
 $barcode=$_POST['product_barcode'];
 
 $query=$mysqli->prepare('SELECT * FROM products WHERE product_barcode=?');

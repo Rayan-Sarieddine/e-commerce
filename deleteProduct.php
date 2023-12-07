@@ -3,6 +3,12 @@ header("Access-Control-Allow-Origin:*");
 include("connection.php");
 
 
+if ($decodedToken->user_role !== 'admin') {
+  http_response_code(403);
+  echo json_encode(["error" => "Unauthorized access"]);
+  exit();
+}
+
 $barcode=$_POST['product_barcode'];
 
 $check_query = $mysqli->prepare('SELECT * FROM products WHERE product_barcode = ?');

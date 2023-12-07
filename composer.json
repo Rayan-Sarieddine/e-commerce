@@ -1,5 +1,5 @@
 {
     "require": {
-        "picqer/php-barcode-generator": "*"
+        "firebase/php-jwt": "^6.10"
     }
 }

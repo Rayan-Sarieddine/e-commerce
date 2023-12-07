@@ -2,6 +2,16 @@
 header("Access-Control-Allow-Origin:*");
 include("connection.php");
 
+require_once 'tokenCheck.php'; 
+$decodedToken = authenticateJWT();
+
+if ($decodedToken->user_role !== 'admin') {
+    http_response_code(403);
+    echo json_encode(["error" => "Unauthorized access"]);
+    exit();
+}
+
+
 
 $barcode=$_POST['product_barcode'];
 $param=$_POST['param'];

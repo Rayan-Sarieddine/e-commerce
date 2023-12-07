@@ -7,7 +7,14 @@ include("connection.php");
 // use Picqer\Barcode\BarcodeGeneratorPNG;
 
 // $generator = new BarcodeGeneratorPNG(); 
+require_once 'tokenCheck.php'; 
+$decodedToken = authenticateJWT();
 
+if ($decodedToken->user_role !== 'admin') {
+    http_response_code(403);
+    echo json_encode(["error" => "Unauthorized access"]);
+    exit();
+}
 
 $name=$_POST['product_name'];
 $barcode=$_POST['product_barcode'];

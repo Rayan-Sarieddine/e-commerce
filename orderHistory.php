@@ -2,6 +2,17 @@
 header("Access-Control-Allow-Origin:*");
 include("connection.php");
 
+require_once 'tokenCheck.php'; 
+$decodedToken = authenticateJWT();
+
+if ($decodedToken->user_role !== 'customer') {
+    http_response_code(403);
+    echo json_encode(["error" => "Unauthorized access"]);
+    exit();
+}
+
+
+
 $id=$_POST["user_id"];
 
 //check if user exists
