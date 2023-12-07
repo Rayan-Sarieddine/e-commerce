@@ -7,6 +7,12 @@ $hashed_password=password_hash($password,PASSWORD_DEFAULT);
 $name=$_POST['user_name'];
 $role=$_POST['user_role'];
 
-$quer
+$query = $mysqli->prepare('INSERT INTO users (user_name, user_email, user_password, user_role) VALUES (?, ?, ?, ?)');
+$query->bind_param("ssss",$name,$email,$hashed_password,$role);
+$query->execute();
 
+$response=[];
+$response["success"]=true;
+
+echo json_encode($response);
 ?>
