@@ -12,7 +12,12 @@ $query->bind_param("ssss",$name,$email,$hashed_password,$role);
 $query->execute();
 
 $response=[];
-$response["success"]=true;
+
+if ($query->execute()) {
+  $response["success"] = true;
+} else {
+  $response["success"] = false;
+}
 
 echo json_encode($response);
 ?>
