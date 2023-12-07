@@ -20,7 +20,7 @@ if($num_rows1> 0){
         FROM cart c
         INNER JOIN orders o ON c.order_id = o.order_id
         INNER JOIN products p ON o.product_id = p.product_id
-        WHERE c.user_id = ? AND c.active_cart="yes"
+        WHERE c.user_id = ? AND c.active_cart="no"
     ');
     $query->bind_param('i', $id);
     $query->execute();
@@ -42,19 +42,14 @@ if($num_rows1> 0){
 
             $products[] = $productDetails;
         }
-/////////////////////////////////////for order history//////////////////////////////////////////
-$query = $mysqli->prepare('UPDATE cart SET active_cart="no" WHERE user_id=?');
-    $query->bind_param('i', $id);
-    $query->execute();
 
-////////////////////////////////////////////////////////////////////////////////////////////
         $response['success'] = true;
-        $response['message'] = 'Checkout details retrieved';
+        $response['message'] = 'order history retrieved';
         $response['products'] = $products;
-        $response['total_cart_price'] = $totalCartPrice;
+        $response['orders_total'] = $totalCartPrice;
     } else {
         $response['success'] = false;
-        $response['message'] = 'User has no items in the cart';
+        $response['message'] = 'User has no order history';
     }
 }
 else{
