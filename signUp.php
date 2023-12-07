@@ -9,7 +9,6 @@ $role=$_POST['user_role'];
 
 $query = $mysqli->prepare('INSERT INTO users (user_name, user_email, user_password, user_role) VALUES (?, ?, ?, ?)');
 $query->bind_param("ssss",$name,$email,$hashed_password,$role);
-$query->execute();
 
 $response=[];
 
