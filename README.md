@@ -11,5 +11,3 @@
 
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
-
-| ![Landing](./readme/demo.jpg)
